@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Dev Finance</title>
+  </head>
+
+  <body>
+    <header>
+      <h1 id="logo">personalFinance$</h1>
+    </header>
+
+    <main class="container">
+      <section id="balance">
+        <h2 class="sr-only">Balanço</h2>
+
+        <div class="card">
+          <h3>
+            <span>Entradas</span>
+            <img src="#" alt="Imagem de entradas" />
+          </h3>
+          <p>R$ 5.000,00</p>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span>Saídas</span>
+            <img src="#" alt="Imagem de saídas" />
+          </h3>
+          <p>R$ 2.000,00</p>
+        </div>
+
+        <div class="card total">
+          <h3>
+            <span>Total</span>
+            <img src="#" alt="Imagem de total" />
+          </h3>
+          <p>R$ 3,000.00</p>
+        </div>
+      </section>
+
+      <section id="transaction">
+        <h2 class="sr-only">Transações</h2>
+        <a href="#" class="button new" onclick="Modal.open()">
+          + Nova Transação</a
+        >
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Data</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="description">Luz</td>
+              <td class="expense">-R$ 5000,00</td>
+              <td class="date">23/01/2021</td>
+              <td>
+                <img src="#" alt="Remover Transação" />
+              </td>
+            </tr>
+
+            <tr>
+              <td class="description">Criação de website</td>
+              <td class="income">-R$ 500,00</td>
+              <td class="date">23/01/2021</td>
+              <td>
+                <img src="#" alt="Remover Transação" />
+              </td>
+            </tr>
+
+            <tr>
+              <td class="description">Internet</td>
+              <td class="expense">-R$ 200,00</td>
+              <td class="date">23/01/2021</td>
+              <td>
+                <img src="#" alt="Remover Transação" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <div class="modal-overlay active">
+      <div class="modal">
+        <div class="form">
+          <h2>Nova Transação</h2>
+          <form action="">
+            <div class="input-group">
+              <label class="sr-only" for="description"></label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Descriçao"
+              />
+            </div>
+
+            <div class="input-group">
+              <label class="sr-only" for="amount"></label>
+              <input
+                type="number"
+                step="0.01"
+                id="amount"
+                name="amount"
+                placeholder="0,00"
+              />
+              <small class="help"
+                >Use o sinal - (negativo) para as despesas e (Vírgula) para as
+                casa decimais
+              </small>
+            </div>
+
+            <div class="input-group">
+              <label class="sr-only" for="date"></label>
+              <input type="date" id="date" name="date" />
+            </div>
+          </form>
+          <div class="input-group actions">
+            <a href="#" class="button cancel" onclick="Modal.close()"
+              >Cancela</a
+            >
+            <button>Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Mario Batalha</p>
+      <p>2021-personalFinance$</p>
+    </footer>
+
+    <script>
+      const Modal = {
+        open() {
+          document.querySelector(".modal-overlay").classList.add("active");
+        },
+        close() {
+          document.querySelector(".modal-overlay").classList.remove("active");
+        }
+      };
+    </script>
+  </body>
+</html>
