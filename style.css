@@ -1,10 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap");
 
 :root {
+  --default: #fff;
+  --gray-primary: #f0f2f5;
   --dark-blue: #363f5f;
   --green: #49aa26;
+  --dark-green: #093028;
+  --dark-green-secondary: #237A57;
   --red: #e92929;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +22,7 @@ html {
 }
 
 body {
-  background: #f0f2f5;
+  background: var(--gray-primary);
   font-family: "poppins", sans-serif;
 }
 
@@ -62,8 +67,8 @@ button {
   height: 50px;
 
   border: none;
-  color: #f0f2f5;
-  background: var(--green);
+  color: var(--gray-primary);
+  background: var(--dark-green);
 
   padding: 0;
   border-radius: 0.25rem;
@@ -71,7 +76,7 @@ button {
 }
 
 button:hover {
-  background: #3dd705;
+  background: var(--dark-green-secondary)
 }
 
 .button.new {
@@ -98,14 +103,20 @@ button:hover {
 }
 
 header {
-  background: #2d4a22;
+  background: var(--dark-green);
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, var(--dark-green-secondary), var(--dark-green));
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #237A57, #093028);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   padding: 2rem 0 10rem;
   text-align: center;
 }
 
 #logo {
-  color: #fff;
-  font-weight: 100;
+  color: var(--default);
+  font-weight: 400;
 }
 
 #balance {
@@ -113,12 +124,12 @@ header {
 }
 
 #balance h2 {
-  color: #fff;
+  color: var(--default);
   margin-top: 0;
 }
 
 .card {
-  background: #fff;
+  background: var(--default);
   padding: 1.5rem 2rem;
   border-radius: 0.25rem;
 
@@ -127,8 +138,8 @@ header {
 }
 
 .card.total {
-  background: #49aa26;
-  color: #fff;
+  background: var(--dark-green);
+  color: var(--default);
 }
 
 .card h3 {
@@ -145,7 +156,7 @@ header {
   line-height: 3rem;
 }
 
-.transation {
+.transaction {
   display: block;
   width: 100%;
   overflow-x: auto;
@@ -160,15 +171,15 @@ header {
 }
 
 table th {
-  background: #fff;
-  font-weight: normal;
+  background: var(--default);
+  font-weight: bold;
 
   padding: 1rem 2rem;
   text-align: left;
 }
 
 table tbody td {
-  background: #fff;
+  background: var(--default);
   padding: 1rem 2rem;
 }
 
@@ -207,7 +218,7 @@ td.expense {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
 
-  lposition: fixed;
+  position: fixed;
   top: 0;
 
   display: flex;
@@ -215,7 +226,7 @@ td.expense {
   justify-content: center;
 
   opacity: 0;
-  lvisibility: hidden;
+  visibility: hidden;
 }
 
 .modal-overlay.active {
@@ -224,7 +235,7 @@ td.expense {
 }
 
 .modal {
-  background: #f0f2f5;
+  background: var(--gray-primary);
   padding: 2.4rem;
   position: relative;
 }
