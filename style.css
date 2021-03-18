@@ -227,17 +227,20 @@ td.expense {
 
   opacity: 0;
   visibility: hidden;
+
 }
 
 .modal-overlay.active {
   opacity: 1;
   visibility: visible;
+  z-index: 999;
 }
 
 .modal {
   background: var(--gray-primary);
   padding: 2.4rem;
   position: relative;
+
 }
 
 .form {
@@ -281,6 +284,8 @@ footer {
   color: var(--dark-blue);
 
   opacity: 0.6;
+  z-index: 0;
+
 }
 
 @media (min-width: 800px) {

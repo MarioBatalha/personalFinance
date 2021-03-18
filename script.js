@@ -8,29 +8,12 @@ const Modal = {
 };
 
 const transactions = [{
-    id: 1,
-    description: "Luz",
+
+    description: "Condóminio",
     amount: -500000,
     date: "8/03/21"
   },
-  {
-    id: 2,
-    description: "Agua",
-    amount: 200000,
-    date: "18/03/21"
-  },
-  {
-    id: 3,
-    description: "Saldo",
-    amount: -100000,
-    date: "8/08/21"
-  },
-  {
-    id: 3,
-    description: "Roupas",
-    amount: 1000000,
-    date: "1/10/21"
-  }
+
 ];
 
 const Transaction = {
@@ -79,11 +62,12 @@ const DOM = {
   addTransaction(transaction, index) {
     const tr = document.createElement("tr");
     tr.innerHTML = DOM.innerHTMLTransaction(transaction);
+    tr.dataset.index = index
 
     DOM.transactionsContainer.appendChild(tr);
   },
 
-  innerHTMLTransaction(transactions) {
+  innerHTMLTransaction(transactions, index) {
     const CSSclass = transactions.amount > 0 ? "income" : "expense";
 
     const amount = Utils.formatCurrency(transactions.amount);
@@ -92,7 +76,7 @@ const DOM = {
           <td class="${CSSclass}">${amount}</td>
           <td class="date">${transactions.date}</td>
           <td>
-          <i class="fas fa-minus-circle">Remover</i>
+          <i class="fas fa-minus-circle" onclick="Transaction.remove()"></i>
           </td>
            `;
 
@@ -130,7 +114,7 @@ const Utils = {
   },
 
   formatCurrency(amount) {
-    const signal = Number(amount) < 0 ? "-" : "";
+    const signal = Number(amount) < 0 ? "" : "";
 
     value = String(amount).replace(/\D/g, "");
     value = Number(amount) / 100;
@@ -213,10 +197,7 @@ const Form = {
 
 const App = {
   init() {
-    transactions.forEach(transactions => {
-      DOM.addTransaction(transactions);
-    });
-
+    transactions.forEach(DOM.addTransaction)
     DOM.updateBalance();
   },
   reload() {
