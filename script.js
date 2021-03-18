@@ -69,7 +69,7 @@ const Transaction = {
   },
 
   total() {
-    return Transactions.incomes() + Transactions.expenses();
+    return Transaction.incomes() + Transaction.expenses();
   }
 };
 
@@ -118,13 +118,24 @@ const DOM = {
 };
 
 const Utils = {
-  formatCurrency(value) {
-    const signal = Number(value) < 0 ? "-" : "";
+  formatAmount(value) {
+    value = Number(value) * 100;
 
-    value = String(value).replace(/\D/g, "");
-    value = Number(value) / 100;
+    return value;
+  },
 
-    value = value.toLocaleString("AO-ANGOLA", {
+  formatDate(date) {
+    const splittedDate = date.split("-");
+    return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`;
+  },
+
+  formatCurrency(amount) {
+    const signal = Number(amount) < 0 ? "-" : "";
+
+    value = String(amount).replace(/\D/g, "");
+    value = Number(amount) / 100;
+
+    value = amount.toLocaleString("AO-ANGOLA", {
       style: "currency",
       currency: "AOA"
     });
@@ -140,11 +151,25 @@ const Form = {
     return {
       description: Form.description.value,
       amount: Form.amount.value,
-      date: Form.date.value,
-    }
+      date: Form.date.value
+    };
   },
-  dataFormat() {
+  formatValues() {
+    let {
+      description,
+      amount,
+      date
+    } = Form.getValues();
 
+    amount = Utils.formatAmount(amount);
+
+    date = Utils.formatDate(date);
+
+    return {
+      description,
+      amount,
+      date
+    };
   },
 
   validateFields() {
@@ -152,16 +177,39 @@ const Form = {
       description,
       amount,
       date
-    } = Form.getValues()
+    } = Form.getValues();
 
-    if (description.trim() === "")
+    if (description.trim() === "" || amount === "" || date === "") {
+      throw new Error("Por favor, preencha todos os campos");
+    }
+  },
+
+  saveTransactions(transaction) {
+    Transaction.add(transaction);
+  },
+
+  clearFields() {
+    Form.description.value = "";
+    Form.amount.value = "";
+    Form.date.value = "";
   },
 
   submit(event) {
     event.preventDefault();
 
+    try {
+      Form.validateFields();
+      const transaction = Form.formatValues();
+
+      Form.saveTransactions(transaction);
+      Form.clearFields();
+
+      Modal.close();
+    } catch (error) {
+      alert(error.message);
+    }
   }
-}
+};
 
 const App = {
   init() {
@@ -176,6 +224,5 @@ const App = {
     App.init();
   }
 };
-
 
 App.init();
