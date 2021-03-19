@@ -10,7 +10,7 @@ const Modal = {
 const transactions = [{
 
     description: "Condóminio",
-    amount: -500000,
+    amount: -5000000,
     date: "8/03/21"
   },
 
